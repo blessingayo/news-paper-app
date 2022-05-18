@@ -1,32 +1,43 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
-  </div>
+  <v-app>
+    <div class="container" id="app">
+      <SourceSelection v-on:sourceChanged="sourceChanged"></SourceSelection>
+
+      <Newslist v-bind:source="source"></Newslist>
+    </div>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import SourceSelection from "./components/SourceSelection.vue"
+import Newslist from "./components/Newslist.vue";
+// import HomePage from "./components/HomePage"
+export default {
+  name: "App",
 
-nav {
-  padding: 30px;
-}
+  components: {
+    // HomePage
+    SourceSelection,
+    Newslist,
+  },
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  data: () => ({
+    return: {
+      source: "",
+    },
+  }),
 
-nav a.router-link-exact-active {
-  color: #42b983;
-}
+  methods: {
+    sourceChanged: function (source){
+      this.source =source;
+    }
+  }
+};
+</script>
+
+<style scoped>
+
+/* #app {
+  padding-top: 20px;
+} */
 </style>
